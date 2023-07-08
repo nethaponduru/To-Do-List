@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>To-Do List</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+    </head>
+    <body>
+        <div class="container">
+            <h1>To-Do List</h1>
+            <p>Date: {{ datetoday2 }}</p>
+            <h2>Tasks:</h2>
+            {% if l == 0 %}
+                <p>No tasks yet!</p>
+            {% else %}
+                <ol>
+                    {% for task in tasklist %}
+                        <li>{{ task }}</li>
+                    {% endfor %}
+                </ol>
+            {% endif %}
+            <h2>Add Task:</h2>
+            <form action="/addtask" method="post">
+                
+                <input type="text"  name="newtask" aria-label="New task">
+                <input type="submit" value="Add">
+            </form>
+            <h2>Remove Task:</h2>
+            <p>(type task number to remove)</p>
+            <form action="/deltask" method="get">
+                <input type="number" name="deltaskid" aria-label="Task index">
+                <input type="submit" value="Remove">
+            </form>
+            <h2>Clear List:</h2>
+            <form action="/clear">
+                <input type="submit" value="Clear">
+            </form>
+        </div>
+    </body>
+</html>
